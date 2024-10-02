@@ -1,40 +1,53 @@
 <script lang="ts">
-import NavigationBar from './components/NavigationBar.vue';
-import SideMenu from './components/SideMenu.vue';
-import Content from './components/Content.vue';
-import {defineComponent, onMounted, ref} from "vue";
-import {useStore} from "vuex";
+import { defineComponent } from "vue";
+import NavigationBar from "@/components/navigation/NavigationBar.vue";
 
 export default defineComponent({
-  name: 'App',
-  components: {
-    NavigationBar,
-    SideMenu,
-    Content
-  },
-  setup() {
-  }
-})
+  name: "App",
+  components: { NavigationBar },
+});
 </script>
 
 <template>
-  <div id="app">
-    <NavigationBar />
-    <div class="flex container row">
-      <SideMenu/>
-      <Content/>
+  <NavigationBar />
+  <RouterView
+    v-slot="{ Component }"
+    :style="{
+      display: 'flex',
+      flexDirection: 'row',
+      height: '100%',
+    }"
+  >
+    <div
+      :style="{
+        display: 'flex',
+        flexDirection: 'row',
+      }"
+    >
+      <div class="Home">
+        <Suspense>
+          <Component :is="Component" />
+        </Suspense>
+      </div>
     </div>
-  </div>
+  </RouterView>
 </template>
 
 <style>
-#app {
-  display: flex;
-  flex-direction: column;
+@font-face {
+  font-family: "santral-light";
+  src: url("./fonts/santral-light.otf") format("opentype");
 }
-
-.container {
-  display: flex;
-  flex: 1;
+body {
+  font-family: "santral-light", sans-serif;
+}
+.body-1 {
+  display: block;
+  font-size: 0.67em;
+  font-weight: normal;
+}
+.Home {
+  width: 100%;
+  height: 100%;
 }
 </style>
