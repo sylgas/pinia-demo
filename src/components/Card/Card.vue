@@ -30,6 +30,7 @@ export default defineComponent({
         {
           id: props.productConfig.id,
           label: props.productConfig.label,
+          price: props.productConfig.productConfigs[0].price,
         },
       ]);
     };

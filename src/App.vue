@@ -10,25 +10,11 @@ export default defineComponent({
 
 <template>
   <NavigationBar />
-  <RouterView
-    v-slot="{ Component }"
-    :style="{
-      display: 'flex',
-      flexDirection: 'row',
-      height: '100%',
-    }"
-  >
-    <div
-      :style="{
-        display: 'flex',
-        flexDirection: 'row',
-      }"
-    >
-      <div class="Home">
-        <Suspense>
-          <Component :is="Component" />
-        </Suspense>
-      </div>
+  <RouterView v-slot="{ Component }">
+    <div class="Home">
+      <Suspense>
+        <Component :is="Component" />
+      </Suspense>
     </div>
   </RouterView>
 </template>

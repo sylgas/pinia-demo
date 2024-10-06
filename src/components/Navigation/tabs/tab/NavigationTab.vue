@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { NAVIGATION_TABS } from "../config/navigationTabs.config";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "NavigationTab",
@@ -15,6 +16,7 @@ export default defineComponent({
     },
   },
   setup() {
+    const store = useStore();
     return { NAVIGATION_TABS };
   },
 });

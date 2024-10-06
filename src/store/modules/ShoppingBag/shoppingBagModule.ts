@@ -1,7 +1,7 @@
 import { Module } from "vuex";
 import { RootState } from "@/store";
-import { ItemInBag } from "@/store/modules/ShoppingBag/shoppingBag.interfaces";
 import { ItemDetails } from "@/views/CoffeeBeans/interfaces/coffeeBeans.interfaces";
+import { ItemInBag } from "@/store/modules/ShoppingBag/shoppingBag.interfaces";
 
 export interface ShoppingBagState {
   itemsInBag: ItemInBag[];
@@ -41,7 +41,7 @@ const actions = {
 };
 
 const getters = {
-  getItemsInBag: (state: ShoppingBagState, id: string) => state.itemsInBag,
+  getItemsInBag: (state: ShoppingBagState) => state.itemsInBag,
   getNumberOfItemsInShoppingBag: (state: ShoppingBagState) =>
     state.itemsInBag.length,
   getItemDetails: (state: ShoppingBagState) => state.itemDetails,
