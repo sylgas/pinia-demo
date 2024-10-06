@@ -1,4 +1,4 @@
-import { CoffeeBag } from "@/components/Card/interfaces/card.interfaces";
+import { CoffeeBag } from "@/store/modules/CoffeeBags/coffeeBag.interfaces";
 
 export const COFFEE_BAGS_CONFIG: CoffeeBag[] = [
   {

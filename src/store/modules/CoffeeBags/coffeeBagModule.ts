@@ -24,7 +24,7 @@ const actions = {
 
 const getters = {};
 
-export const shoppingBagModule: Module<CoffeeBagState, RootState> = {
+export const coffeeBagsModule: Module<CoffeeBagState, RootState> = {
   namespaced: true,
   state,
   mutations,

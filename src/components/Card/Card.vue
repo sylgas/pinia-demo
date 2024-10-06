@@ -1,10 +1,10 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
-import { CoffeeBag } from "@/components/Card/interfaces/card.interfaces";
 import { useStore } from "vuex";
 import { ItemInBag } from "@/store/modules/ShoppingBag/shoppingBag.interfaces";
 import { get } from "lodash";
 import { useRouter } from "vue-router";
+import { CoffeeBag } from "@/store/modules/CoffeeBags/coffeeBag.interfaces";
 
 export default defineComponent({
   name: "Card",
