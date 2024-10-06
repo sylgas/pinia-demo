@@ -7,7 +7,6 @@ export default defineComponent({
   name: "CoffeeBeansView",
   components: { Card },
   setup() {
-    console.info(JSON.stringify(COFFEE_BAGS_CONFIG));
     return {
       COFFEE_BAGS_CONFIG,
     };

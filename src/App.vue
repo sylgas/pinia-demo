@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import NavigationBar from "@/components/navigation/NavigationBar.vue";
+import NavigationBar from "@/components/Navigation/NavigationBar.vue";
 
 export default defineComponent({
   name: "App",

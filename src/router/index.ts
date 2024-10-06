@@ -2,24 +2,30 @@ import { createRouter, createWebHistory } from "vue-router";
 import ShoppingBagView from "../views/ShoppingBag/ShoppingBagView.vue";
 import HomeView from "../views/Home/HomeView.vue";
 import CoffeeBeansView from "../views/CoffeeBeans/CoffeeBeansView.vue";
+import CoffeeBeansDetailsView from "@/views/CoffeeBeans/Details/CoffeeBeansDetailsView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
       path: "/",
-      name: "Home",
+      name: "home",
       component: HomeView,
     },
     {
       path: "/bag",
-      name: "Bag",
+      name: "bag",
       component: ShoppingBagView,
     },
     {
       path: "/collection/coffee-beans",
-      name: "Coffee Beans",
+      name: "collection.coffeeBeans",
       component: CoffeeBeansView,
+    },
+    {
+      path: "/collection/coffee-beans/:itemId",
+      name: "collection.coffeeBeans.details",
+      component: CoffeeBeansDetailsView,
     },
   ],
 });

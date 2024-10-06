@@ -1,4 +1,4 @@
-export interface CardConfig {
+export interface CoffeeBag {
   id: string;
   label: string;
   sourceUrl: string;

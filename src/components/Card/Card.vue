@@ -1,28 +1,32 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
-import { CardConfig } from "@/components/Card/interfaces/card.interfaces";
+import { CoffeeBag } from "@/components/Card/interfaces/card.interfaces";
 import { useStore } from "vuex";
+import { ItemInBag } from "@/store/modules/ShoppingBag/shoppingBag.interfaces";
+import { get } from "lodash";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "Card",
   props: {
     productConfig: {
-      required: true,
-      type: Object as PropType<CardConfig>,
+      default: () => ({}),
+      type: Object as PropType<CoffeeBag>,
     },
   },
   setup(props) {
     const store = useStore();
+    const router = useRouter();
 
     const numberOfAddedItemsToShoppingBag = computed(
       () =>
-        store.getters.getItemsInBag.filter(
-          (item) => item.id === props.productConfig.id,
+        get(store.getters, "shoppingBag/getItemsInBag").filter(
+          (item: ItemInBag) => item.id === props.productConfig.id,
         ).length,
     );
 
     const onItemAdded = () => {
-      store.dispatch("addItems", [
+      store.dispatch("shoppingBag/addItems", [
         {
           id: props.productConfig.id,
           label: props.productConfig.label,
@@ -31,17 +35,27 @@ export default defineComponent({
     };
 
     const onItemRemoved = () => {
-      store.dispatch("removeItem", props.productConfig.id);
+      store.dispatch("shoppingBag/removeItem", props.productConfig.id);
     };
 
     const getImageUrl = (url: string) => {
+      // @ts-ignore
       return new URL(url, import.meta.url).href;
     };
+
+    const navigateToDetails = () => {
+      router.push({
+        name: "collection.coffeeBeans.details",
+        params: { itemId: props.productConfig.id },
+      });
+    };
+
     return {
       numberOfAddedItemsToShoppingBag,
       getImageUrl,
       onItemAdded,
       onItemRemoved,
+      navigateToDetails,
     };
   },
 });
@@ -49,31 +63,33 @@ export default defineComponent({
 
 <template>
   <div class="CardWrapper">
-    <RouterLink to="/dupa">
-      <div>
-        <div class="Card">
-          <img
-            class="Card__img"
-            :src="getImageUrl(productConfig.sourceUrl)"
-            width="250px"
-            height="320px"
-            alt="N/A"
-          />
-          <span class="Card__label body-1">
-            {{ productConfig.label }}
-          </span>
-          <span class="Card__price body-1">
-            {{
-              `${productConfig.productConfigs[0].price} ${productConfig.productConfigs[0].currency}`
-            }}
-          </span>
-        </div>
+    <div>
+      <div class="Card" @click="navigateToDetails">
+        <img
+          class="Card__img"
+          :src="getImageUrl(productConfig.sourceUrl)"
+          width="250px"
+          height="320px"
+          alt="N/A"
+        />
+        <span class="Card__label body-1">
+          {{ productConfig.label }}
+        </span>
+        <span class="Card__price body-1">
+          {{
+            `${productConfig.productConfigs[0].price} ${productConfig.productConfigs[0].currency}`
+          }}
+        </span>
       </div>
-    </RouterLink>
+    </div>
     <div class="CardWrapper__ItemInteractions">
       <div @click="onItemRemoved" :style="{ cursor: 'pointer' }">-</div>
-      <div v-if="numberOfAddedItemsToShoppingBag > 0">
-        {{ numberOfAddedItemsToShoppingBag }}
+      <div>
+        {{
+          numberOfAddedItemsToShoppingBag > 0
+            ? numberOfAddedItemsToShoppingBag
+            : null
+        }}
       </div>
       <div @click="onItemAdded" :style="{ cursor: 'pointer' }">+</div>
     </div>
@@ -100,6 +116,10 @@ export default defineComponent({
   color: black;
   cursor: pointer;
   text-decoration: none;
+}
+
+.Card__img {
+  cursor: pointer;
 }
 
 .Card__price {

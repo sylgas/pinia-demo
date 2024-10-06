@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import { NAVIGATION_TABS } from "@/components/navigation/tabs/config/navigationTabs.config";
+import { NAVIGATION_TABS } from "../config/navigationTabs.config";
 
 export default defineComponent({
   name: "NavigationTab",

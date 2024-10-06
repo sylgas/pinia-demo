@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import ShoppingBag from "@/components/navigation/ShoppingBag.vue";
-import NavigationTabs from "@/components/navigation/tabs/NavigationTabs.vue";
-import HomeNav from "@/components/navigation/HomeNav.vue";
+import ShoppingBag from "@/components/Navigation/ShoppingBag.vue";
+import NavigationTabs from "@/components/Navigation/tabs/NavigationTabs.vue";
+import HomeNav from "@/components/Navigation/HomeNav.vue";
 
 export default defineComponent({
   name: "NavigationBar",

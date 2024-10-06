@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-defineComponent({
-  name: "Home",
+export default defineComponent({
+  name: "HomeView",
   setup() {
     return {};
   },

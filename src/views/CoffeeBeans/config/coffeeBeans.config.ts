@@ -1,6 +1,6 @@
-import { CardConfig } from "@/components/Card/interfaces/card.interfaces";
+import { CoffeeBag } from "@/components/Card/interfaces/card.interfaces";
 
-export const COFFEE_BAGS_CONFIG: CardConfig[] = [
+export const COFFEE_BAGS_CONFIG: CoffeeBag[] = [
   {
     id: "1",
     label: "El Carmen Columbia",
@@ -16,9 +16,9 @@ export const COFFEE_BAGS_CONFIG: CardConfig[] = [
     label: "Ethiopia Muy Bien",
     sourceUrl: "../../assets/coffees/el-carmen.webp",
     productConfigs: [
-      { price: "19", currency: "Euro", size: "250", isAvailable: true },
-      { price: "35", currency: "Euro", size: "500", isAvailable: true },
-      { price: "65", currency: "Euro", size: "1000", isAvailable: true },
+      { price: "25", currency: "Euro", size: "250", isAvailable: true },
+      { price: "44", currency: "Euro", size: "500", isAvailable: true },
+      { price: "79", currency: "Euro", size: "1000", isAvailable: true },
     ],
   },
   {
@@ -26,9 +26,9 @@ export const COFFEE_BAGS_CONFIG: CardConfig[] = [
     label: "Bueno Brasileo",
     sourceUrl: "../../assets/coffees/el-carmen.webp",
     productConfigs: [
-      { price: "19", currency: "Euro", size: "250", isAvailable: true },
-      { price: "35", currency: "Euro", size: "500", isAvailable: true },
-      { price: "65", currency: "Euro", size: "1000", isAvailable: true },
+      { price: "24", currency: "Euro", size: "250", isAvailable: true },
+      { price: "39", currency: "Euro", size: "500", isAvailable: true },
+      { price: "69", currency: "Euro", size: "1000", isAvailable: true },
     ],
   },
   {
@@ -56,9 +56,9 @@ export const COFFEE_BAGS_CONFIG: CardConfig[] = [
     label: "El Carmen Columbia",
     sourceUrl: "../../assets/coffees/el-carmen.webp",
     productConfigs: [
-      { price: "19", currency: "Euro", size: "250", isAvailable: true },
-      { price: "35", currency: "Euro", size: "500", isAvailable: true },
-      { price: "65", currency: "Euro", size: "1000", isAvailable: true },
+      { price: "24", currency: "Euro", size: "250", isAvailable: true },
+      { price: "39", currency: "Euro", size: "500", isAvailable: true },
+      { price: "69", currency: "Euro", size: "1000", isAvailable: true },
     ],
   },
   {

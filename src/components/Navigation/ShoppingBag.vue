@@ -1,14 +1,15 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import { useStore } from "vuex";
+import { get } from "lodash";
 
 export default defineComponent({
   name: "ShoppingBag",
   setup() {
     const store = useStore();
 
-    const numberOfItemsInBag = computed(
-      () => store.getters.getNumberOfItemsInShoppingBag,
+    const numberOfItemsInBag = computed(() =>
+      get(store.getters, "shoppingBag/getNumberOfItemsInShoppingBag"),
     );
     return {
       numberOfItemsInBag,
