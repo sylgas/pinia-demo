@@ -13,11 +13,11 @@ export interface RootState {
   shoppingBag: ShoppingBagState;
 }
 
-const index = createStore<RootState>({
+const store = createStore<RootState>({
   modules: {
     navigation: navigationModule,
     shoppingBag: shoppingBagModule,
   },
 });
 
-export default index;
+export default store;

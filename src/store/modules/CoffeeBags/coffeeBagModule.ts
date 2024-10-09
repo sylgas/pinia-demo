@@ -1,5 +1,5 @@
 import { Module } from "vuex";
-import { RootState } from "@/store";
+import { RootState } from "@/store/store";
 import { CoffeeBag } from "@/store/modules/CoffeeBags/coffeeBag.interfaces";
 
 export interface CoffeeBagState {

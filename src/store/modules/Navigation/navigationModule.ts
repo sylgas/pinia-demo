@@ -1,5 +1,5 @@
 import { Module } from "vuex";
-import { RootState } from "@/store";
+import { RootState } from "@/store/store";
 
 export interface NavigationState {
   selectedTab: string;

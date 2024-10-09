@@ -1,5 +1,5 @@
 import { Module } from "vuex";
-import { RootState } from "@/store";
+import { RootState } from "@/store/store";
 import { ItemDetails } from "@/views/CoffeeBeans/interfaces/coffeeBeans.interfaces";
 import { ItemInBag } from "@/store/modules/ShoppingBag/shoppingBag.interfaces";
 
