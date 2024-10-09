@@ -44,11 +44,16 @@ export default defineComponent({
       store.dispatch("shoppingBag/removeItem", itemId);
     };
 
+    const onItemRemoval = (itemId: string) => {
+      store.dispatch("shoppingBag/removeAllItemsWithId", itemId);
+    };
+
     return {
       totalPrice,
       shoppingBagMap,
       onItemQuantityIncreased,
       onItemQuantityDecreased,
+      onItemRemoval,
     };
   },
 });
@@ -76,7 +81,7 @@ export default defineComponent({
           <td>
             <button @click="onItemQuantityIncreased(item)">+</button>
             <button @click="onItemQuantityDecreased(item.id)">-</button>
-            <button @click="() => {}">Remove</button>
+            <button @click="onItemRemoval(item.id)">Remove</button>
           </td>
         </tr>
       </tbody>
