@@ -1,14 +1,23 @@
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onBeforeMount } from "vue";
 import { COFFEE_BAGS_CONFIG } from "@/views/CoffeeBeans/config/coffeeBeans.config";
 import Card from "@/components/Card/Card.vue";
+import { useStore } from "vuex";
+import { get } from "lodash";
 
 export default defineComponent({
   name: "CoffeeBeansView",
   components: { Card },
   setup() {
+    const store = useStore();
+
+    const coffeeBags = get(store.getters, "coffeeBags/getCoffeeBags") || [];
+
+    onBeforeMount(() => {
+      store.dispatch("coffeeBags/loadCoffeeBags", COFFEE_BAGS_CONFIG);
+    });
     return {
-      COFFEE_BAGS_CONFIG,
+      coffeeBags,
     };
   },
 });
@@ -16,10 +25,7 @@ export default defineComponent({
 
 <template>
   <div class="CoffeeBeansView">
-    <Card
-      v-for="productConfig in COFFEE_BAGS_CONFIG"
-      :product-config="productConfig"
-    />
+    <Card v-for="productConfig in coffeeBags" :product-config="productConfig" />
   </div>
 </template>
 

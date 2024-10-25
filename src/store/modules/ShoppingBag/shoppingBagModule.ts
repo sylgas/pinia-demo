@@ -26,6 +26,9 @@ const mutations = {
   setItemDetails(state: ShoppingBagState, itemDetails: ItemDetails) {
     state.itemDetails = itemDetails;
   },
+  removeAllItemsWithId(state: ShoppingBagState, itemId: string) {
+    state.itemsInBag = state.itemsInBag.filter((item) => item.id !== itemId);
+  },
 };
 
 const actions = {
@@ -34,6 +37,9 @@ const actions = {
   },
   removeItem({ commit }, itemId: string) {
     commit("removeItemFromShoppingBag", itemId);
+  },
+  removeAllItemsWithId({ commit }, itemId: string) {
+    commit("removeAllItemsWithId", itemId);
   },
   setItemDetails({ commit }, itemDetails: ItemDetails) {
     commit("setItemDetails", itemDetails);
