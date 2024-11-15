@@ -1,6 +1,5 @@
-export interface ShoppingBagItem {
-  id: string;
-  label: string;
-  price: number;
+import { ItemInBag } from '@/store/stores/ShoppingBag/shoppingBag.interfaces';
+
+export interface ShoppingBagItem extends ItemInBag {
   count: number;
 }

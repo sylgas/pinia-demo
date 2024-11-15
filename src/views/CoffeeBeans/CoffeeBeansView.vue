@@ -1,26 +1,18 @@
-<script lang="ts">
-import { defineComponent, onBeforeMount } from "vue";
+<script setup lang="ts">
+import { onBeforeMount } from "vue";
 import { COFFEE_BAGS_CONFIG } from "@/views/CoffeeBeans/config/coffeeBeans.config";
 import Card from "@/components/Card/Card.vue";
-import { useStore } from "vuex";
-import { get } from "lodash";
+import { coffeeBagStore } from '@/store/stores/CoffeeBags/coffeeBag.store';
+import { storeToRefs } from 'pinia';
 
-export default defineComponent({
-  name: "CoffeeBeansView",
-  components: { Card },
-  setup() {
-    const store = useStore();
+const store = coffeeBagStore();
+const { setCoffeeBags } = store;
+const { coffeeBags } = storeToRefs(store);
 
-    const coffeeBags = get(store.getters, "coffeeBags/getCoffeeBags") || [];
-
-    onBeforeMount(() => {
-      store.dispatch("coffeeBags/loadCoffeeBags", COFFEE_BAGS_CONFIG);
-    });
-    return {
-      coffeeBags,
-    };
-  },
+onBeforeMount(() => {
+  setCoffeeBags(COFFEE_BAGS_CONFIG);
 });
+
 </script>
 
 <template>

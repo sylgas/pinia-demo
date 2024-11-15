@@ -1,4 +1,4 @@
-import { CoffeeBag } from "@/store/modules/CoffeeBags/coffeeBag.interfaces";
+import { CoffeeBag } from "@/store/stores/CoffeeBags/coffeeBag.interfaces";
 
 export const COFFEE_BAGS_CONFIG: CoffeeBag[] = [
   {

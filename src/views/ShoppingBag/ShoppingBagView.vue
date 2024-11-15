@@ -1,18 +1,19 @@
 <script lang="ts">
-import { computed, defineComponent, Ref } from "vue";
-import { useStore } from "vuex";
-import { get } from "lodash";
+import { computed, defineComponent } from "vue";
 import { ShoppingBagItem } from "@/views/ShoppingBag/interfaces/shoppingBag/shoppingBag.interface";
+import { useShoppingBagStore } from '@/store/stores/ShoppingBag/shoppingBag.store';
+import { storeToRefs } from 'pinia';
+import { ItemInBag } from '@/store/stores/ShoppingBag/shoppingBag.interfaces';
+import { useShoppingBagSetupStore } from '@/store/stores/ShoppingBag/shoppingBagSetup.store';
 
 export default defineComponent({
   setup() {
-    const store = useStore();
+    const store = useShoppingBagSetupStore();
+    const { addItemsToShoppingBag, removeItemFromShoppingBag, removeAllItemsWithId } = store;
+    const { itemsInBag: shoppingBagItems } = storeToRefs(store);
 
-    const shoppingBagItems = computed(
-      () => get(store.getters, "shoppingBag/getItemsInBag") || [],
-    );
-    const shoppingBagMap: Ref<ShoppingBagItem> = computed(() => {
-      return shoppingBagItems.value.reduce((acc, item: ShoppingBagItem) => {
+    const shoppingBagMap = computed(() => {
+      return shoppingBagItems.value.reduce((acc: ShoppingBagItem, item: ItemInBag) => {
         if (acc[item.id]) {
           acc[item.id].count++;
         } else {
@@ -31,7 +32,7 @@ export default defineComponent({
     });
 
     const onItemQuantityIncreased = (item: ShoppingBagItem) => {
-      store.dispatch("shoppingBag/addItems", [
+      addItemsToShoppingBag([
         {
           id: item.id,
           label: item.label,
@@ -41,11 +42,11 @@ export default defineComponent({
     };
 
     const onItemQuantityDecreased = (itemId: string) => {
-      store.dispatch("shoppingBag/removeItem", itemId);
+      removeItemFromShoppingBag(itemId);
     };
 
     const onItemRemoval = (itemId: string) => {
-      store.dispatch("shoppingBag/removeAllItemsWithId", itemId);
+      removeAllItemsWithId(itemId);
     };
 
     return {

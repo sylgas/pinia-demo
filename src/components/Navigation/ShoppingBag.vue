@@ -1,21 +1,9 @@
-<script lang="ts">
-import { computed, defineComponent } from "vue";
-import { useStore } from "vuex";
-import { get } from "lodash";
+<script setup lang="ts">
+import { useShoppingBagStore } from '@/store/stores/ShoppingBag/shoppingBag.store';
+import { useShoppingBagSetupStore } from '@/store/stores/ShoppingBag/shoppingBagSetup.store';
 
-export default defineComponent({
-  name: "ShoppingBag",
-  setup() {
-    const store = useStore();
+const store = useShoppingBagSetupStore();
 
-    const numberOfItemsInBag = computed(() =>
-      get(store.getters, "shoppingBag/getNumberOfItemsInShoppingBag"),
-    );
-    return {
-      numberOfItemsInBag,
-    };
-  },
-});
 </script>
 
 <template>
@@ -29,7 +17,7 @@ export default defineComponent({
           alt="Shopping Bag"
         />
         <div class="paragraph">
-          <p>{{ numberOfItemsInBag }}</p>
+          <p>{{ store.numberOfItemsInShoppingBag }}</p>
         </div>
       </div>
     </div>

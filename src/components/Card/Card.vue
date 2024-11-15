@@ -1,10 +1,11 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
-import { useStore } from "vuex";
-import { ItemInBag } from "@/store/modules/ShoppingBag/shoppingBag.interfaces";
-import { get } from "lodash";
+import { ItemInBag } from "@/store/stores/ShoppingBag/shoppingBag.interfaces";
 import { useRouter } from "vue-router";
-import { CoffeeBag } from "@/store/modules/CoffeeBags/coffeeBag.interfaces";
+import { CoffeeBag } from "@/store/stores/CoffeeBags/coffeeBag.interfaces";
+import { useShoppingBagStore } from '@/store/stores/ShoppingBag/shoppingBag.store';
+import { storeToRefs } from 'pinia';
+import { useShoppingBagSetupStore } from '@/store/stores/ShoppingBag/shoppingBagSetup.store';
 
 export default defineComponent({
   name: "Card",
@@ -15,28 +16,30 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const store = useStore();
+    const store = useShoppingBagSetupStore();
+    const { addItemsToShoppingBag, removeItemFromShoppingBag } = store;
+    const { itemsInBag } = storeToRefs(store);
     const router = useRouter();
 
     const numberOfAddedItemsToShoppingBag = computed(
       () =>
-        get(store.getters, "shoppingBag/getItemsInBag").filter(
+          itemsInBag.value.filter(
           (item: ItemInBag) => item.id === props.productConfig.id,
         ).length,
     );
 
     const onItemAdded = () => {
-      store.dispatch("shoppingBag/addItems", [
+      addItemsToShoppingBag([
         {
           id: props.productConfig.id,
           label: props.productConfig.label,
           price: props.productConfig.productConfigs[0].price,
-        },
+        } as ItemInBag,
       ]);
     };
 
     const onItemRemoved = () => {
-      store.dispatch("shoppingBag/removeItem", props.productConfig.id);
+      removeItemFromShoppingBag(props.productConfig.id);
     };
 
     const getImageUrl = (url: string) => {
